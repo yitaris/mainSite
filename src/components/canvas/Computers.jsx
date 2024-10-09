@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect,useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, useAnimations, Preload, ScrollControls, OrbitControls, useScroll } from "@react-three/drei";
 import CanvasLoader from "../Loader";
