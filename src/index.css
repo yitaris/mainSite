@@ -21,6 +21,7 @@ body::-webkit-scrollbar {
 }
 /* Mobil kaydırmayı akıcı hale getir */
 html, body {
+  touch-action: pan-y; /* Y ekseninde kaydırma hareketini etkinleştirir */
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }

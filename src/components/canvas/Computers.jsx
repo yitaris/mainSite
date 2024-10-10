@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect,useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, useAnimations, Preload, ScrollControls, OrbitControls, useScroll } from "@react-three/drei";
 import CanvasLoader from "../Loader";
@@ -43,9 +43,9 @@ const Computers = ({ isMobile, mouseX, mouseY }) => {
       newModelScene.position.y = -rotationAmounty * 15;
       newModelScene.position.x = rotationAmount * 15;
       scene.position.z = modelZ + 20; // Z-pozisyonunu scroll'a göre ayarlıyoruz
-      console.log(modelZ)
     }
   });
+
   return (
     <mesh>
       <hemisphereLight intensity={4} groundColor="white" />
@@ -66,7 +66,7 @@ const Computers = ({ isMobile, mouseX, mouseY }) => {
       <primitive
         object={newModelScene}
         scale={isMobile ? 2 : 3}
-        position={isMobile ? [1, 1, 0] : [0, 0, modelZ]} // Z pozisyonunu dinamik hale getiriyoruz
+        position={isMobile ? [0, 0, 0] : [0, 0, modelZ]} // Z pozisyonunu dinamik hale getiriyoruz
         rotation={[0, 0, 0]}
         castShadow
         receiveShadow
@@ -97,9 +97,21 @@ const ComputersCanvas = () => {
 
     window.addEventListener("mousemove", handleMouseMove);
 
+    // Mobil cihazlar için touchmove olayını ekleyelim
+    const handleTouchMove = (event) => {
+      if (event.touches.length === 1) {
+        const touch = event.touches[0];
+        setMouseX(touch.clientX);
+        setMouseY(touch.clientY);
+      }
+    };
+
+    window.addEventListener("touchmove", handleTouchMove);
+
     return () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
     };
   }, []);
 
@@ -109,10 +121,10 @@ const ComputersCanvas = () => {
       gl={{ preserveDrawingBuffer: true }}
     >
       <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls enableZoom={false}/>
-         <ScrollControls pages={2} damping={0.25} infinite={false} horizontal={false}>
-           <Computers isMobile={isMobile} mouseX={mouseX} mouseY={mouseY} />
-          </ScrollControls>
+        <OrbitControls enableZoom={false} />
+        <ScrollControls pages={2} damping={0.25} infinite={false} horizontal={false}>
+          <Computers isMobile={isMobile} mouseX={mouseX} mouseY={mouseY} />
+        </ScrollControls>
       </Suspense>
       <Preload all />
     </Canvas>
