@@ -84,12 +84,25 @@ const Computers = ({ isMobile, mouseX, mouseY,windowWidth }) => {
         receiveShadow
       />
       <Text
-          position={[0, positionY, -30]} // X ve Y eksenini sıfır yaparak merkezliyoruz
+          position={windowWidth < 600 ? [0, 2, modelZ+4] : [0, 2, modelZ]} // X ve Y eksenini sıfır yaparak merkezliyoruz
+          rotation={windowWidth < 600 ? [0, 0, 0] :[0, 0, 0]}
           fontSize={windowWidth < 600 ? 0.6 : 1} // Ekran boyutuna göre font büyüklüğü
           color="white"
-          opacity={opacity} // Opacity statik olabilir
+          opacity={1} // Opacity statik olabili
+          textAlign="center" // Metni ortalamak için
         >
-        Merhaba Ben Yiğit👋 React native developerım
+        {"HOŞGELDİNİZ"}
+      </Text>
+      <Text
+          position={windowWidth < 600 ? [0, 0, modelZ-70] : [0, positionY, modelZ-60]} // X ve Y eksenini sıfır yaparak merkezliyoruz
+          fontSize={windowWidth < 600 ? 0.65 : 1} // Ekran boyutuna göre font büyüklüğü
+          color="white"
+          opacity={opacity} // Opacity statik olabili
+          textAlign="center" // Metni ortalamak için
+        >
+        {"Merhaba Ben Yiğit👋\n"}
+        {"React Native Developerım \n"}
+        {"Lütfen Kaydırmaya Devam Edin\n"}
       </Text>
     </mesh>
   );
