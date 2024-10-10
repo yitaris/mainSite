@@ -93,9 +93,16 @@ const ComputersCanvas = () => {
 
     mediaQuery.addEventListener("change", handleMediaQueryChange);
 
+    const handleMouseMove = (event) => {
+      setMouseX(event.clientX);
+      setMouseY(event.clientY);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
     return () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
@@ -103,6 +110,7 @@ const ComputersCanvas = () => {
     <Canvas
       camera={{ position: [0, 0, 0], fov: 50 }}
       gl={{ preserveDrawingBuffer: true }}
+      style={{overflow: 'scroll'}}
     >
       <Suspense fallback={<CanvasLoader />}>
       <OrbitControls enableZoom={false} enablePan={false} enableRotate={false}/>
