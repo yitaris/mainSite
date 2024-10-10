@@ -92,7 +92,7 @@ const ComputersCanvas = () => {
 
     const handleTouchMove = (event) => {
       const touch = event.touches[0];
-      const deltaY = touch.clientY - mouseY;
+      const deltaY = touch.clientY;
       window.scrollBy(0, -deltaY * 0.1); // Yatay kaydırmayı engellemek için sadece dikey kaydırma ekleyebilirsiniz
       setMouseY(touch.clientY);
     };
