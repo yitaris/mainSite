@@ -1,9 +1,8 @@
-import React, { Suspense, useEffect, useState, useRef } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
    useGLTF, useAnimations, Preload,
-   ScrollControls, OrbitControls, useScroll,
-   Scroll
+   ScrollControls, useScroll,Scroll,
   } from "@react-three/drei";
 import CanvasLoader from "../Loader";
 import gsap from "gsap";
@@ -116,6 +115,7 @@ const ComputersCanvas = () => {
         pages={3}
         damping={isMobile ? 0.25 : 0.25}
         enabled={true} // Mobilde kaydırmayı etkinleştirin
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
           <Scroll>
             <Computers 
