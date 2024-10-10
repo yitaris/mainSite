@@ -38,13 +38,13 @@ const Computers = ({ isMobile, mouseX, mouseY }) => {
         gsap.to(newModelScene, { opacity: 1, duration: 1 });
       }
 
-      if(!isMobile) {
+      if (!isMobile) {
         newModelScene.rotation.z = -rotationAmount;
         newModelScene.rotation.x = rotationAmounty;
         newModelScene.position.y = -rotationAmounty * 15;
         newModelScene.position.x = rotationAmount * 15;
-        scene.position.z = modelZ + 20; // Z-pozisyonunu scroll'a göre ayarlıyoruz
       }
+      scene.position.z = modelZ + 20; // Z-pozisyonunu scroll'a göre ayarlıyoruz
     }
   });
 
@@ -99,7 +99,7 @@ const ComputersCanvas = () => {
 
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Mobil cihazlar için touchmove olayını ekleyelim
+    // Mobil cihazlar için touch olaylarını ekleyelim
     const handleTouchMove = (event) => {
       if (event.touches.length === 1) {
         const touch = event.touches[0];
@@ -108,11 +108,18 @@ const ComputersCanvas = () => {
       }
     };
 
+    // Kaydırma olayını algılamak için touchstart ve touchend olayları ekleyelim
+    const handleTouchStart = (event) => {
+      event.preventDefault(); // Varsayılan kaydırma davranışını engelle
+    };
+
+    window.addEventListener("touchstart", handleTouchStart);
     window.addEventListener("touchmove", handleTouchMove);
 
     return () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
     };
   }, []);
