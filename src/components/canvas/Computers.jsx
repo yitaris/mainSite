@@ -92,12 +92,7 @@ const ComputersCanvas = () => {
 
     const handleTouchMove = (event) => {
       const touch = event.touches[0];
-      const deltaY = touch.clientY - mouseY; // Y hareketini hesaplayın
       setMouseY(touch.clientY);
-      
-      // Scroll offset'e göre kaydırmayı hızlandırmak için ayar yapın
-      const scrollDelta = deltaY * 0.1;
-      window.scrollBy(0, -scrollDelta); // Yalnızca dikey kaydırma uygulayın
     };
     window.addEventListener("touchmove", handleTouchMove);
 
