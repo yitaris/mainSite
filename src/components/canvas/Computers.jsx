@@ -110,7 +110,6 @@ const ComputersCanvas = () => {
     <Canvas
       camera={{ position: [0, 0, 0], fov: 50 }}
       gl={{ preserveDrawingBuffer: true }}
-      style={{overflow: 'scroll'}}
     >
       <Suspense fallback={<CanvasLoader />}>
       <ScrollControls
