@@ -93,16 +93,9 @@ const ComputersCanvas = () => {
 
     mediaQuery.addEventListener("change", handleMediaQueryChange);
 
-    const handleMouseMove = (event) => {
-      setMouseX(event.clientX);
-      setMouseY(event.clientY);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
     return () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
-      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
@@ -112,7 +105,7 @@ const ComputersCanvas = () => {
       gl={{ preserveDrawingBuffer: true }}
     >
       <Suspense fallback={<CanvasLoader />}>
-      <OrbitControls enableZoom={false} enablePan={true} enableRotate={false}/>
+      <OrbitControls enableZoom={false} enablePan={false} enableRotate={false}/>
       <ScrollControls
         pages={3}
         damping={isMobile ? 0.25 : 0.25}
