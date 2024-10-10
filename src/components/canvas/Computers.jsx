@@ -82,29 +82,10 @@ const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [mouseX, setMouseX] = useState(window.innerWidth / 2);
   const [mouseY, setMouseY] = useState(window.innerHeight / 2);
-  const [wheelX, setWheelX] = useState(window.innerWidth / 2);
-  const [wheelY, setWheelY] = useState(window.innerHeight / 2);
-
-  const previousTouchY = useRef(0);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 500px)");
     setIsMobile(mediaQuery.matches);
-
-    const handleTouchStart = (event) => {
-      if (event.touches.length > 0) {
-        previousTouchY.current = event.touches[0].clientY;
-      }
-    };
-
-    window.addEventListener('touchstart', handleTouchStart);
-
-    const handleTouchMove = (event) => {
-    const touchY = event.touches[0].clientY;
-    const deltaY = previousTouchY.current - touchY;
-    previousTouchY.current = touchY;
-  };
-    window.addEventListener("touchmove", handleTouchMove);
 
     const handleMediaQueryChange = (event) => {
       setIsMobile(event.matches);
@@ -112,25 +93,15 @@ const ComputersCanvas = () => {
 
     mediaQuery.addEventListener("change", handleMediaQueryChange);
 
-    const handleScroll = (event) => {
-      setWheelX(event.clientX);
-      setWheelY(event.clientY);
-    };
-
-    window.addEventListener("wheel", handleScroll);
-
     const handleMouseMove = (event) => {
       setMouseX(event.clientX);
       setMouseY(event.clientY);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
     return () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
-      window.removeEventListener("wheel", handleScroll);
-      window.removeEventListener("touchstart" , handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
@@ -152,7 +123,6 @@ const ComputersCanvas = () => {
             <Computers 
               isMobile={isMobile}
               mouseX={mouseX} mouseY={mouseY}
-              wheelX={wheelX} wheelY={wheelY}
             />
         </ScrollControls>
       </Suspense>
