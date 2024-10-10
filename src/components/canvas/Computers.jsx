@@ -92,23 +92,25 @@ const ComputersCanvas = () => {
 
     const handleTouchMove = (event) => {
     const touch = event.touches[0];
-    const deltaY = touch.clientY - mouseY;
-    setMouseY(touch.clientY);
+    const deltaY = touch.clientY - mouseY * 2;
+    setMouseY(deltaY);
+
+    window.scrollBy(0, mouseY);
   };
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+      window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
     const handleMediaQueryChange = (event) => {
       setIsMobile(event.matches);
     };
 
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
+      mediaQuery.addEventListener("change", handleMediaQueryChange);
 
     const handleMouseMove = (event) => {
       setMouseX(event.clientX);
       setMouseY(event.clientY);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
