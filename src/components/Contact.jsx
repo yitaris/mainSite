@@ -73,7 +73,7 @@ const Contact = () => {
         className='flex-[0.75] bg-black-100 p-8 rounded-2xl'
       >
         <p className={styles.sectionSubText}>Benimle İletişim Geç</p>
-        <h3 className={styles.sectionHeadText}>Bilgiler.</h3>
+        <h3 className={styles.sectionHeadText} style={{color:'#fff'}}>Bilgiler.</h3>
 
         <form
           ref={formRef}
@@ -88,7 +88,7 @@ const Contact = () => {
               value={form.name}
               onChange={handleChange}
               placeholder="İsminizi bu kısma yazabilir misiniz?"
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
+              className='bg-tertiary py-4 px-6 placeholder:text-white text-white rounded-lg outline-none border-none font-medium'
             />
           </label>
           <label className='flex flex-col'>
@@ -99,7 +99,7 @@ const Contact = () => {
               value={form.email}
               onChange={handleChange}
               placeholder="E-postanızı buraya yazabilir misiniz?"
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
+              className='bg-tertiary py-4 px-6 placeholder:text-white text-white rounded-lg outline-none border-none font-medium'
             />
           </label>
           <label className='flex flex-col'>
@@ -110,7 +110,7 @@ const Contact = () => {
               value={form.message}
               onChange={handleChange}
               placeholder='Söylemek istediğiniz bir şey mi var?'
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
+              className='bg-tertiary py-4 px-6 placeholder:text-white text-white rounded-lg outline-none border-none font-medium'
             />
           </label>
 
