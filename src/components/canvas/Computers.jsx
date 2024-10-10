@@ -95,7 +95,7 @@ const ComputersCanvas = () => {
     const deltaY = touch.clientY;
     setMouseY(deltaY);
 
-    window.scrollBy(0, mouseY);
+    window.scrollBy(0, -mouseY);
   };
       window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
