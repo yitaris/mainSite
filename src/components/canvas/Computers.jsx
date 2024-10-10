@@ -8,7 +8,7 @@ import {
 import CanvasLoader from "../Loader";
 import gsap from "gsap";
 
-const Computers = ({ isMobile, mouseX, mouseY }) => {
+const Computers = ({ isMobile, mouseX, mouseY}) => {
   const { scene, animations } = useGLTF("./clouds/scene.gltf");
   const { actions } = useAnimations(animations, scene);
   const { scene: newModelScene, animations: newModelAnimations } = useGLTF("./plane/scene.gltf"); // İkinci model
@@ -27,14 +27,11 @@ const Computers = ({ isMobile, mouseX, mouseY }) => {
 
   useFrame(() => {
     if (scene && newModelScene) {
-      const rotationAmount = (mouseX - window.innerWidth / 2) * 0.001;
-      const rotationAmounty = (mouseY - window.innerHeight / 2) * 0.001;
-      
-      // Scroll verisini kullanarak ikinci modelin Z-pozisyonunu ayarlıyoruz
-      const scrollZ = scroll.offset * 100; // Scroll ile Z-ekseni üzerindeki hareket miktarı
-      const newZPosition = -15 + scrollZ; // Başlangıç pozisyonu -15, scroll arttıkça artacak
-      setModelZ(newZPosition); // Z-ekseni pozisyonunu güncelle
-
+      const positionAmount = (mouseX - window.innerWidth / 2) * 0.001;
+      const positionAmountY = (mouseY - window.innerHeight / 2) * 0.001;
+      const scrollZ = scroll.offset * 100; 
+      const newZPosition = -15 + scrollZ; 
+      setModelZ(newZPosition);
       // Eğer Z pozisyonu 11'e ulaştıysa model kaybolacak (fade out)
       if (newZPosition >= 11) {
         gsap.to(newModelScene, { opacity: 0, duration: 1 });
@@ -43,10 +40,10 @@ const Computers = ({ isMobile, mouseX, mouseY }) => {
       }
 
       if (!isMobile) {
-        newModelScene.rotation.z = -rotationAmount;
-        newModelScene.rotation.x = rotationAmounty;
-        newModelScene.position.y = -rotationAmounty * 15;
-        newModelScene.position.x = rotationAmount * 15;
+        newModelScene.rotation.z = -positionAmount * 1;
+        newModelScene.rotation.x = positionAmountY * 1;
+        newModelScene.position.y = -positionAmountY * 10;
+        newModelScene.position.x = positionAmount * 12;
       }
       scene.position.z = modelZ + 20; // Z-pozisyonunu scroll'a göre ayarlıyoruz
     }
@@ -85,6 +82,9 @@ const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [mouseX, setMouseX] = useState(window.innerWidth / 2);
   const [mouseY, setMouseY] = useState(window.innerHeight / 2);
+  const [wheelX, setWheelX] = useState(window.innerWidth / 2);
+  const [wheelY, setWheelY] = useState(window.innerHeight / 2);
+
   const previousTouchY = useRef(0);
 
   useEffect(() => {
@@ -112,18 +112,26 @@ const ComputersCanvas = () => {
 
     mediaQuery.addEventListener("change", handleMediaQueryChange);
 
+    const handleScroll = (event) => {
+      setWheelX(event.clientX);
+      setWheelY(event.clientY);
+    };
+
+    window.addEventListener("wheel", handleScroll);
+
     const handleMouseMove = (event) => {
       setMouseX(event.clientX);
       setMouseY(event.clientY);
     };
 
-    window.addEventListener("wheel", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
-      window.removeEventListener("wheel", handleMouseMove);
-      window.removeEventListener("touchstart" , handleTouchStart)
+      window.removeEventListener("wheel", handleScroll);
+      window.removeEventListener("touchstart" , handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
@@ -141,9 +149,11 @@ const ComputersCanvas = () => {
         horizontal={false}
         enabled={true} // Mobilde kaydırmayı etkinleştirin
       >
-          <Scroll>
-            <Computers isMobile={isMobile} mouseX={mouseX} mouseY={mouseY} />
-          </Scroll>
+            <Computers 
+              isMobile={isMobile}
+              mouseX={mouseX} mouseY={mouseY}
+              wheelX={wheelX} wheelY={wheelY}
+            />
         </ScrollControls>
       </Suspense>
       <Preload all />
