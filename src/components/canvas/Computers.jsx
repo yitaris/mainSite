@@ -92,7 +92,7 @@ const ComputersCanvas = () => {
 
     const handleTouchMove = (event) => {
     const touch = event.touches[0];
-    const deltaY = touch.clientY - mouseY * 2;
+    const deltaY = touch.clientY;
     setMouseY(deltaY);
 
     window.scrollBy(0, mouseY);
@@ -128,7 +128,7 @@ const ComputersCanvas = () => {
       <OrbitControls enableZoom={false} enablePan={true} enableDamping={true} dampingFactor={0.1} />
       <ScrollControls
         pages={2}
-        damping={isMobile ? 0.1 : 0.25}
+        damping={isMobile ? 0.25 : 0.25}
         infinite={false}
         horizontal={false}
         enabled={true} // Mobilde kaydırmayı etkinleştirin
