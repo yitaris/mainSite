@@ -90,6 +90,14 @@ const ComputersCanvas = () => {
     const mediaQuery = window.matchMedia("(max-width: 500px)");
     setIsMobile(mediaQuery.matches);
 
+    const handleTouchMove = (event) => {
+      const touch = event.touches[0];
+      const deltaY = touch.clientY - mouseY;
+      window.scrollBy(0, -deltaY * 0.1); // Yatay kaydırmayı engellemek için sadece dikey kaydırma ekleyebilirsiniz
+      setMouseY(touch.clientY);
+    };
+    window.addEventListener("touchmove", handleTouchMove);
+
     const handleMediaQueryChange = (event) => {
       setIsMobile(event.matches);
     };
@@ -103,27 +111,9 @@ const ComputersCanvas = () => {
 
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Mobil cihazlar için touch olaylarını ekleyelim
-    const handleTouchMove = (event) => {
-      if (event.touches.length === 1) {
-        const touch = event.touches[0];
-        setMouseX(touch.clientX);
-        setMouseY(touch.clientY);
-      }
-    };
-
-    // Kaydırma olayını algılamak için touchstart ve touchend olayları ekleyelim
-    const handleTouchStart = (event) => {
-      event.preventDefault(); // Varsayılan kaydırma davranışını engelle
-    };
-
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchmove", handleTouchMove);
-
     return () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
     };
   }, []);
@@ -134,8 +124,14 @@ const ComputersCanvas = () => {
       gl={{ preserveDrawingBuffer: true }}
     >
       <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls enableZoom={false} enablePan={true} />
-        <ScrollControls pages={2} damping={0.25} infinite={false} horizontal={false}>
+      <OrbitControls enableZoom={false} enablePan={true} enableDamping={true} dampingFactor={0.1} />
+      <ScrollControls
+        pages={2}
+        damping={0.25}
+        infinite={false}
+        horizontal={false}
+        enabled={true} // Mobilde kaydırmayı etkinleştirin
+      >
           <Scroll>
             <Computers isMobile={isMobile} mouseX={mouseX} mouseY={mouseY} />
           </Scroll>

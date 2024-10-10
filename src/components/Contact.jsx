@@ -87,7 +87,7 @@ const Contact = () => {
               name='name'
               value={form.name}
               onChange={handleChange}
-              placeholder="İsminizi bu kısma yazabilir misiniz?"
+              placeholder="İsminizi bu kısma yazınız"
               className='bg-tertiary py-4 px-6 placeholder:text-white text-white rounded-lg outline-none border-none font-medium'
             />
           </label>
@@ -98,7 +98,7 @@ const Contact = () => {
               name='email'
               value={form.email}
               onChange={handleChange}
-              placeholder="E-postanızı buraya yazabilir misiniz?"
+              placeholder="E-postanızı buraya yazınız"
               className='bg-tertiary py-4 px-6 placeholder:text-white text-white rounded-lg outline-none border-none font-medium'
             />
           </label>
