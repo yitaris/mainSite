@@ -48,28 +48,28 @@ const Computers = ({ isMobile, mouseX, mouseY }) => {
   });
   return (
     <mesh>
-      <hemisphereLight intensity={0.15} groundColor="black" />
+      <hemisphereLight intensity={4} groundColor="white" />
       <spotLight
-        position={[-20, 50, 10]}
-        angle={0.12}
+        position={[0, 20, 20]} // Daha yukarıya ve modele doğru
+        angle={0.3}
         penumbra={1}
-        intensity={1}
-        castShadow
-        shadow-mapSize={1024}
+        intensity={2}
       />
       <pointLight intensity={0.5} position={[0, 0, 0]} />
       <primitive
         object={scene}
-        scale={isMobile ? 2.75 : 10}
+        scale={isMobile ? 8 : 10}
         position={isMobile ? [0, -3, -2.2] : [-1.5, -1.5, modelZ]}
         rotation={[0, 0, 0]}
       />
       {/* İkinci model */}
       <primitive
         object={newModelScene}
-        scale={isMobile ? 0.75 : 3}
+        scale={isMobile ? 2 : 3}
         position={isMobile ? [1, 1, 0] : [0, 0, modelZ]} // Z pozisyonunu dinamik hale getiriyoruz
         rotation={[0, 0, 0]}
+        castShadow
+        receiveShadow
       />
     </mesh>
   );
@@ -110,7 +110,7 @@ const ComputersCanvas = () => {
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls enableZoom={false}/>
-         <ScrollControls pages={2} damping={0.25}>
+         <ScrollControls pages={2} damping={0.25} infinite={false} horizontal={false}>
            <Computers isMobile={isMobile} mouseX={mouseX} mouseY={mouseY} />
           </ScrollControls>
       </Suspense>

@@ -13,6 +13,17 @@
   color-scheme: dark;
 }
 
+body {
+  overflow: auto;
+}
+body::-webkit-scrollbar {
+  display: none; /* Webkit tarayıcılarında scroll barı gizler */
+}
+/* Mobil kaydırmayı akıcı hale getir */
+html, body {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
 .hash-span {
   margin-top: -100px;
   padding-bottom: 100px;
