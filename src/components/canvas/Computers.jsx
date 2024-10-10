@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
    useGLTF, useAnimations, Preload,
@@ -85,36 +85,44 @@ const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [mouseX, setMouseX] = useState(window.innerWidth / 2);
   const [mouseY, setMouseY] = useState(window.innerHeight / 2);
+  const previousTouchY = useRef(0);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 500px)");
     setIsMobile(mediaQuery.matches);
 
-    const handleTouchMove = (event) => {
-    const touch = event.touches[0];
-    const deltaY = touch.clientY;
-    setMouseY(deltaY);
+    const handleTouchStart = (event) => {
+      if (event.touches.length > 0) {
+        previousTouchY.current = event.touches[0].clientY;
+      }
+    };
 
-    window.scrollBy(0, mouseY);
+    window.addEventListener('touchstart', handleTouchStart);
+
+    const handleTouchMove = (event) => {
+    const touchY = event.touches[0].clientY;
+    const deltaY = previousTouchY.current - touchY;
+    previousTouchY.current = touchY;
   };
-      window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove);
 
     const handleMediaQueryChange = (event) => {
       setIsMobile(event.matches);
     };
 
-      mediaQuery.addEventListener("change", handleMediaQueryChange);
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
 
     const handleMouseMove = (event) => {
       setMouseX(event.clientX);
       setMouseY(event.clientY);
     };
 
-      window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("wheel", handleMouseMove);
 
     return () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("wheel", handleMouseMove);
+      window.removeEventListener("touchstart" , handleTouchStart)
       window.removeEventListener("touchmove", handleTouchMove);
     };
   }, []);
@@ -125,7 +133,7 @@ const ComputersCanvas = () => {
       gl={{ preserveDrawingBuffer: true }}
     >
       <Suspense fallback={<CanvasLoader />}>
-      <OrbitControls enableZoom={false} enablePan={true} enableDamping={true}  />
+      <OrbitControls enableZoom={false} enablePan={false} enableRotate={false}/>
       <ScrollControls
         pages={2}
         damping={isMobile ? 0.25 : 0.25}
