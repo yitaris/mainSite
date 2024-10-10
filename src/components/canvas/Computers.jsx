@@ -59,14 +59,14 @@ const Computers = ({ isMobile, mouseX, mouseY }) => {
       <primitive
         object={scene}
         scale={isMobile ? 8 : 10}
-        position={isMobile ? [0, -3, -2.2] : [-1.5, -1.5, modelZ]}
+        position={isMobile ? [0, -3, modelZ] : [-1.5, -1.5, modelZ]}
         rotation={[0, 0, 0]}
       />
       {/* İkinci model */}
       <primitive
         object={newModelScene}
         scale={isMobile ? 2 : 3}
-        position={isMobile ? [0, 0, 0] : [0, 0, modelZ]} // Z pozisyonunu dinamik hale getiriyoruz
+        position={isMobile ? [0, 0, modelZ] : [0, 0, modelZ]} // Z pozisyonunu dinamik hale getiriyoruz
         rotation={[0, 0, 0]}
         castShadow
         receiveShadow
