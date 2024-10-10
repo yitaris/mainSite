@@ -92,9 +92,12 @@ const ComputersCanvas = () => {
 
     const handleTouchMove = (event) => {
       const touch = event.touches[0];
-      const deltaY = touch.clientY - (mouseY * 5);
-      window.scrollBy(0, -deltaY * 0.1); // Yatay kaydırmayı engellemek için sadece dikey kaydırma ekleyebilirsiniz
+      const deltaY = touch.clientY - mouseY; // Y hareketini hesaplayın
       setMouseY(touch.clientY);
+      
+      // Scroll offset'e göre kaydırmayı hızlandırmak için ayar yapın
+      const scrollDelta = deltaY * 0.1;
+      window.scrollBy(0, -scrollDelta); // Yalnızca dikey kaydırma uygulayın
     };
     window.addEventListener("touchmove", handleTouchMove);
 
@@ -127,7 +130,7 @@ const ComputersCanvas = () => {
       <OrbitControls enableZoom={false} enablePan={true} enableDamping={true} dampingFactor={0.1} />
       <ScrollControls
         pages={2}
-        damping={0.25}
+        damping={isMobile ? 0.05 : 0.25}
         infinite={false}
         horizontal={false}
         enabled={true} // Mobilde kaydırmayı etkinleştirin
