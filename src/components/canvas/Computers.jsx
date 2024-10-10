@@ -1,6 +1,10 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useGLTF, useAnimations, Preload, ScrollControls, OrbitControls, useScroll } from "@react-three/drei";
+import {
+   useGLTF, useAnimations, Preload,
+   ScrollControls, OrbitControls, useScroll,
+   Scroll
+  } from "@react-three/drei";
 import CanvasLoader from "../Loader";
 import gsap from "gsap";
 
@@ -130,9 +134,11 @@ const ComputersCanvas = () => {
       gl={{ preserveDrawingBuffer: true }}
     >
       <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls enableZoom={false} />
+        <OrbitControls enableZoom={false} enablePan={true} />
         <ScrollControls pages={2} damping={0.25} infinite={false} horizontal={false}>
-          <Computers isMobile={isMobile} mouseX={mouseX} mouseY={mouseY} />
+          <Scroll>
+            <Computers isMobile={isMobile} mouseX={mouseX} mouseY={mouseY} />
+          </Scroll>
         </ScrollControls>
       </Suspense>
       <Preload all />
