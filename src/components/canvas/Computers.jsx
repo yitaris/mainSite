@@ -113,12 +113,9 @@ const ComputersCanvas = () => {
       style={{overflow: 'scroll'}}
     >
       <Suspense fallback={<CanvasLoader />}>
-      <OrbitControls enableZoom={false} enablePan={false} enableRotate={false}/>
       <ScrollControls
         pages={3}
         damping={isMobile ? 0.25 : 0.25}
-        infinite={false}
-        horizontal={false}
         enabled={true} // Mobilde kaydırmayı etkinleştirin
       >
           <Scroll>
