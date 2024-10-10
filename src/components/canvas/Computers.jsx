@@ -114,16 +114,18 @@ const ComputersCanvas = () => {
       <Suspense fallback={<CanvasLoader />}>
       <OrbitControls enableZoom={false} enablePan={true} enableRotate={false}/>
       <ScrollControls
-        pages={2}
+        pages={3}
         damping={isMobile ? 0.25 : 0.25}
         infinite={false}
         horizontal={false}
         enabled={true} // Mobilde kaydırmayı etkinleştirin
       >
+          <Scroll>
             <Computers 
               isMobile={isMobile}
               mouseX={mouseX} mouseY={mouseY}
             />
+          </Scroll>
         </ScrollControls>
       </Suspense>
       <Preload all />
