@@ -127,7 +127,7 @@ const ComputersCanvas = () => {
       <OrbitControls enableZoom={false} enablePan={true} enableDamping={true} dampingFactor={0.1} />
       <ScrollControls
         pages={2}
-        damping={0.001}
+        damping={5}
         infinite={false}
         horizontal={false}
         enabled={true} // Mobilde kaydırmayı etkinleştirin
