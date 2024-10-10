@@ -112,7 +112,7 @@ const ComputersCanvas = () => {
       gl={{ preserveDrawingBuffer: true }}
     >
       <Suspense fallback={<CanvasLoader />}>
-      <OrbitControls enableZoom={false} enablePan={false} enableRotate={false}/>
+      <OrbitControls enableZoom={false} enablePan={true} enableRotate={false}/>
       <ScrollControls
         pages={2}
         damping={isMobile ? 0.25 : 0.25}
