@@ -95,7 +95,7 @@ const ComputersCanvas = () => {
     const deltaY = touch.clientY;
     setMouseY(deltaY);
 
-    window.scrollBy(0, -mouseY);
+    window.scrollBy(0, mouseY);
   };
       window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
@@ -125,7 +125,7 @@ const ComputersCanvas = () => {
       gl={{ preserveDrawingBuffer: true }}
     >
       <Suspense fallback={<CanvasLoader />}>
-      <OrbitControls enableZoom={false} enablePan={true} enableDamping={true} dampingFactor={0.1} />
+      <OrbitControls enableZoom={false} enablePan={true} enableDamping={true}  />
       <ScrollControls
         pages={2}
         damping={isMobile ? 0.25 : 0.25}
