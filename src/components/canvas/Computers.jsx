@@ -39,12 +39,12 @@ const Computers = ({ isMobile, mouseX, mouseY}) => {
         gsap.to(newModelScene, { opacity: 1, duration: 1 });
       }
 
-      if (!isMobile) {
+      
         newModelScene.rotation.z = -positionAmount * 1;
         newModelScene.rotation.x = positionAmountY * 1;
         newModelScene.position.y = -positionAmountY * 10;
         newModelScene.position.x = positionAmount * 12;
-      }
+      
       scene.position.z = modelZ + 20; // Z-pozisyonunu scroll'a göre ayarlıyoruz
     }
   });
