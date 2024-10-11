@@ -17,7 +17,8 @@ const Computers = ({ isMobile, mouseX, mouseY,windowWidth }) => {
   const [modelZ, setModelZ] = useState(10); // birinci modelin Z pozisyonunu kontrol etmek için state
   const [opacity, setOpacity] = useState(0);
   const [positionY, setPositionY] = useState(0);
-  
+  const [isAtTop, setIsAtTop] = useState(true);
+  const [scrollDirection, setScrollDirection] = useState('');
   useEffect(() => {
     if (actions) {
       actions[Object.keys(actions)[0]]?.reset().play();
@@ -34,7 +35,24 @@ const Computers = ({ isMobile, mouseX, mouseY,windowWidth }) => {
       const scrollZ = scroll.offset * 100;
       const scrollY = scroll.offset;
       const visibleAtScrollY = 0.4;
+      const maxScroll = 98; // Scroll'un en son noktasını belirtiyoruz
 
+      if (scrollZ >= maxScroll && isAtTop) {
+        window.scrollTo({
+          top: window.innerHeight,
+          behavior: "smooth",
+        })
+        setIsAtTop(false);
+        setScrollDirection('down');
+      } else if (scrollY < 0.01 && !isAtTop) {
+        window.scrollTo({
+          top: 0, // Sayfanın üstüne gitmek için
+          behavior: "smooth",
+        });
+        setIsAtTop(true); // Artık üstteyiz
+        setScrollDirection('up'); // Yönü yukarı olarak belirliyoruz
+      }
+      console.log('scroll',scrollZ);
       if (scrollY >= visibleAtScrollY) {
         // Yazılar görünür hale gelsin
         setOpacity(1); 
