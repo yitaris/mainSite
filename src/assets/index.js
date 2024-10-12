@@ -11,6 +11,8 @@ import Akpa from './Akpa.png';
 import MSS from './MSS.png'
 import dijimental from './dijimental.png'
 import yusufKaya from './yusufKaya.png';
+import oguzcanduru from './oguzcanduru.png';
+import emirayaz from './emirayaz.png';
 
 import css from "./tech/css.png";
 import docker from "./tech/docker.png";
@@ -42,6 +44,8 @@ export {
   MSS,
   dijimental,
   yusufKaya,
+  oguzcanduru,
+  emirayaz,
   backend,
   creator,
   mobile,
