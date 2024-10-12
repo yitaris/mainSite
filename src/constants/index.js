@@ -103,7 +103,7 @@ const experiences = [
   {
     title: "Dijimental Reklam Ajansı",
     company_name: "Dijimental",
-    icon: MSS,
+    icon: dijimental,
     iconBg: "#fff",
     date: "Eylül 2023 - Kasım 2023",
     points: [
@@ -116,7 +116,7 @@ const experiences = [
   {
     title: "Mobile App Dev",
     company_name: "MSS Mükemmel Savunma Sanayi",
-    icon: dijimental,
+    icon: MSS,
     iconBg: "#fff",
     date: "Ekim 2023 - Temmuz 2024",
     points: [
