@@ -102,7 +102,7 @@ const experiences = [
   },
   {
     title: "Dijimental Reklam Ajansı",
-    company_name: "Tesla",
+    company_name: "Dijimental",
     icon: MSS,
     iconBg: "#fff",
     date: "Eylül 2023 - Kasım 2023",
