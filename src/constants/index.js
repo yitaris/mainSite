@@ -12,6 +12,8 @@ import {
   dijimental,
   carrent,
   yusufKaya,
+  oguzcanduru,
+  emirayaz,
   jobit,
   tripguide,
   threejs,
@@ -135,7 +137,7 @@ const testimonials = [
     name: "Oğuz can Duru",
     designation: "FREELANCER",
     company: "",
-    image: "https://media.licdn.com/dms/image/v2/D4D03AQHytiQ3AUgRQw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1725286886239?e=1733961600&v=beta&t=Ld16SLFH_zAIdG7VGR-iJl0_70W9lAr4fOkmo9rmB28",
+    image: oguzcanduru,
   },
   {
     testimonial:
@@ -151,7 +153,7 @@ const testimonials = [
     name: "Emir Ayaz",
     designation: "CEO",
     company: "Syntra Media",
-    image: "https://media.licdn.com/dms/image/v2/D5603AQGwK9miwxynrg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1678120832121?e=1733961600&v=beta&t=3nJQaJfQCvpEmvz31IPecNpZJP5viuV5k9PCz6mA26Q",
+    image: emirayaz,
   },
 ];
 
