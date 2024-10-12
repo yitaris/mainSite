@@ -41,7 +41,7 @@ const Navbar = () => {
             window.scrollTo(0, 0);
           }}
         >
-          <img src={logoMine} alt='logo' className='w-9 h-9 object-contain' />
+          
           <p className='text-white text-[18px] font-bold cursor-pointer flex '
           style={{color: scrolled ? '#685f77' : '#fff'}}>
             YITARIS&nbsp;
