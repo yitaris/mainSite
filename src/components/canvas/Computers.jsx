@@ -153,7 +153,7 @@ const Computers = ({ isMobile, mouseX, mouseY, windowWidth, windowHeight, setBac
         ...prevState,
         phone3: isMobile
           ? (prevState.phone3 === windowWidth / 350 ? -windowWidth / 400 : windowWidth / 350)
-          : (prevState.phone3 === windowWidth / 280 ? 0 : windowWidth / 280)
+          : (prevState.phone3 === windowWidth / 300 ? 0 : windowWidth / 300)
       }));
       setTargetRotation((prevRotations) => ({
         ...prevRotations,
