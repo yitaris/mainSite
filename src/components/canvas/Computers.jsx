@@ -24,12 +24,12 @@ const Computers = ({ isMobile, mouseX, mouseY, windowWidth, windowHeight, setBac
   const [targetXPosition, setTargetXPosition] = useState({
     phone1: isMobile ? windowWidth / 1000 : windowWidth / 480,
     phone2: isMobile ? windowWidth / 500 : windowWidth / 350,
-    phone3: isMobile ? windowWidth / 350 : windowWidth / 280,
+    phone3: isMobile ? windowWidth / 350 : windowWidth / 300,
   });
   const [currentXPosition, setCurrentXPosition] = useState({
     phone1: isMobile ? windowWidth / 1000 : windowWidth / 480,
     phone2: isMobile ? windowWidth / 500 : windowWidth / 350,
-    phone3: isMobile ? windowWidth / 350 : windowWidth / 280,
+    phone3: isMobile ? windowWidth / 350 : windowWidth / 300,
   });
   const [targetRotation, setTargetRotation] = useState({
     phone1: -0.5,
