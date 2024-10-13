@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { styles } from "../styles";
 import { navLinks } from "../constants";
-import { logoMine, menu, close } from "../assets";
+import { menu, close } from "../assets";
 
 const Navbar = () => {
   const [active, setActive] = useState("");
@@ -43,7 +43,7 @@ const Navbar = () => {
         >
           
           <p className='text-white text-[18px] font-bold cursor-pointer flex '
-          style={{color: scrolled ? '#685f77' : '#fff'}}>
+          style={{color: scrolled ? '#4b4a70' : '#4b4a70'}}>
             YITARIS&nbsp;
             <span className='sm:block hidden'>| React Dev</span>
           </p>
@@ -71,7 +71,6 @@ const Navbar = () => {
             className='w-[28px] h-[28px] object-contain'
             onClick={() => setToggle(!toggle)}
           />
-
           <div
             className={`${
               !toggle ? "hidden" : "flex"
@@ -82,7 +81,7 @@ const Navbar = () => {
                 <li
                   key={nav.id}
                   className={`font-poppins font-medium cursor-pointer text-[16px] ${
-                    active === nav.title ? "text-custom" : "text-white-100"
+                    active === nav.title ? "white-100" : "white-100"
                   }`}
                   onClick={() => {
                     setToggle(!toggle);
