@@ -53,7 +53,7 @@ const Navbar = () => {
           {navLinks.map((nav) => (
             <li
               key={nav.id}
-              className={`${scrolled ? 'text-purple' : 'text-white-100'} ${
+              className={`${scrolled ? 'text-purple' : 'text-purple'} ${
                 active === nav.title && scrolled ? 'text-custom' : "text-purple"
               } hover:text-custom text-[18px] font-medium cursor-pointer`}
               onClick={() => setActive(nav.title)}
