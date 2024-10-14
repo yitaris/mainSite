@@ -1,19 +1,21 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Preload, ScrollControls, Scroll, useScroll, } from "@react-three/drei";
-import { Vector2, Raycaster } from "three";
+import { Vector2, Raycaster, } from "three";
 import CanvasLoader from "../Loader";
 
 const Computers = ({ isMobile, mouseX, mouseY, windowWidth, windowHeight, setBackgroundColor,}) => {
-  const phoneGLB = useGLTF("./phone/phone.glb");
-  const phoneGLB2 = useGLTF("./phone/phone2.glb");
-  const phoneGLB3 = useGLTF("./phone/phone3.glb");
+  const phoneGLB = useGLTF("./phone/iphone1.glb");
+  const phoneGLB2 = useGLTF("./phone/iphone2.glb");
+  const phoneGLB3 = useGLTF("./phone/iphone3.glb");
 
   const scroll = useScroll();
   const scrollY = scroll.offset * 9;
   const [isAtTop, setIsAtTop] = useState(true);
   const [scrollDirection, setScrollDirection] = useState('');
   const [number1 ,setNumber1] = useState(0);
+  const [lightPosition, setLightPosition] = useState(0);
+  const [lightBG, setLightBG] = useState("");
 
   const raycaster = new Raycaster();
   const mouse = new Vector2();
@@ -114,9 +116,12 @@ const Computers = ({ isMobile, mouseX, mouseY, windowWidth, windowHeight, setBac
       setNumber1((prevNumber) => {
         const newNumber = prevNumber + 1;
         if (newNumber % 2 === 0) {
-          setBackgroundColor(["#fff", "#fff"]);
+          setBackgroundColor(["#1E201E", "#1E201E"]);
+          setLightPosition(0)
         } else {
-          setBackgroundColor(["#BE3144", "#44000D"]);
+          setBackgroundColor(["#BE3144", "#1E201E"]);
+          setLightPosition(10)
+          setLightBG("#BE3144")
         }
         return newNumber;
       });
@@ -140,9 +145,12 @@ const Computers = ({ isMobile, mouseX, mouseY, windowWidth, windowHeight, setBac
       setNumber1((prevNumber) => {
         const newNumber = prevNumber + 1;
         if (newNumber % 2 === 0) {
-          setBackgroundColor(["#fff", "#fff"]);
+          setBackgroundColor(["#1E201E", "#1E201E"]);
+          setLightPosition(0)
         } else {
-          setBackgroundColor(["#007880", "#1E3E62"]);
+          setBackgroundColor(["#007880", "#1E201E"]);
+          setLightPosition(10)
+          setLightBG("#007880")
         }
         return newNumber;
       });
@@ -166,9 +174,12 @@ const Computers = ({ isMobile, mouseX, mouseY, windowWidth, windowHeight, setBac
       setNumber1((prevNumber) => {
         const newNumber = prevNumber + 1;
         if (newNumber % 2 === 0) {
-          setBackgroundColor(["#fff", "#fff"]);
+          setBackgroundColor(["#1E201E", "#1E201E"]);
+          setLightPosition(0)
         } else {
-          setBackgroundColor(["#FFDD93", "#D49B54"]);
+          setBackgroundColor(["#FFDD93", "#1E201E"]);
+          setLightPosition(10)
+          setLightBG("#FFDD93")
         }
         return newNumber;
       });
@@ -178,10 +189,12 @@ const Computers = ({ isMobile, mouseX, mouseY, windowWidth, windowHeight, setBac
 
   return (
     <>
+      <ambientLight intensity={1} />
+      <directionalLight position={[-1, 0.5, 0]} intensity={lightPosition} color={lightBG} />
       <primitive
         object={phoneGLB.scene}
         scale={currentScale.phone1}
-        position={[currentXPosition.phone1, -1, -8]}
+        position={[currentXPosition.phone1, 0, -8]}
         rotation={[0, currentRotation.phone1, 0]}
         onPointerDown={(event) => {
           event.stopPropagation();
@@ -191,7 +204,7 @@ const Computers = ({ isMobile, mouseX, mouseY, windowWidth, windowHeight, setBac
       <primitive
         object={phoneGLB2.scene}
         scale={currentScale.phone2}
-        position={[currentXPosition.phone2, -1, -8]}
+        position={[currentXPosition.phone2, 0, -8]}
         rotation={[0, currentRotation.phone2, 0]}
         onPointerDown={(event) => {
           event.stopPropagation();
@@ -201,7 +214,7 @@ const Computers = ({ isMobile, mouseX, mouseY, windowWidth, windowHeight, setBac
       <primitive
         object={phoneGLB3.scene}
         scale={currentScale.phone3}
-        position={[currentXPosition.phone3, -1, -8]}
+        position={[currentXPosition.phone3, 0, -8]}
         rotation={[0, currentRotation.phone3, 0]}
         onPointerDown={(event) => {
           event.stopPropagation();
@@ -218,10 +231,10 @@ const ComputersCanvas = () => {
   const [mouseY, setMouseY] = useState(window.innerHeight / 2);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  const [backgroundColor, setBackgroundColor] = useState(["#fff", "#fff"]);
+  const [backgroundColor, setBackgroundColor] = useState(["#1E201E", "#1E201E"]);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 500px)");
+    const mediaQuery = window.matchMedia("(max-width: 600px)");
     setIsMobile(mediaQuery.matches);
 
     const handleMediaQueryChange = (event) => {
