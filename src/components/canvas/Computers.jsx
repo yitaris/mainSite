@@ -14,8 +14,6 @@ const Computers = ({ isMobile, mouseX, mouseY, windowWidth, windowHeight, setBac
   const [isAtTop, setIsAtTop] = useState(true);
   const [scrollDirection, setScrollDirection] = useState('');
   const [number1 ,setNumber1] = useState(0);
-  const [number2 ,setNumber2] = useState(0);
-  const [number3 ,setNumber3] = useState(0);
 
   const raycaster = new Raycaster();
   const mouse = new Vector2();
@@ -23,13 +21,13 @@ const Computers = ({ isMobile, mouseX, mouseY, windowWidth, windowHeight, setBac
   // Her telefon için pozisyon ve rotasyon state'leri
   const [targetXPosition, setTargetXPosition] = useState({
     phone1: isMobile ? windowWidth / 1000 : windowWidth / 480,
-    phone2: isMobile ? windowWidth / 500 : windowWidth / 350,
-    phone3: isMobile ? windowWidth / 350 : windowWidth / 300,
+    phone2: isMobile ? windowWidth / 500 : windowWidth / 400,
+    phone3: isMobile ? windowWidth / 350 : windowWidth / 350,
   });
   const [currentXPosition, setCurrentXPosition] = useState({
     phone1: isMobile ? windowWidth / 1000 : windowWidth / 480,
-    phone2: isMobile ? windowWidth / 500 : windowWidth / 350,
-    phone3: isMobile ? windowWidth / 350 : windowWidth / 300,
+    phone2: isMobile ? windowWidth / 500 : windowWidth / 400,
+    phone3: isMobile ? windowWidth / 350 : windowWidth / 350,
   });
   const [targetRotation, setTargetRotation] = useState({
     phone1: -0.5,
@@ -127,7 +125,7 @@ const Computers = ({ isMobile, mouseX, mouseY, windowWidth, windowHeight, setBac
         ...prevState,
         phone2: isMobile
           ? (prevState.phone2 === windowWidth / 500 ? -windowWidth / 400 : windowWidth / 500)
-          : (prevState.phone2 === windowWidth / 350 ? 0 : windowWidth / 350)
+          : (prevState.phone2 === windowWidth / 400 ? 0 : windowWidth / 400)
       }));
       setTargetRotation((prevRotations) => ({
         ...prevRotations,
@@ -153,7 +151,7 @@ const Computers = ({ isMobile, mouseX, mouseY, windowWidth, windowHeight, setBac
         ...prevState,
         phone3: isMobile
           ? (prevState.phone3 === windowWidth / 350 ? -windowWidth / 400 : windowWidth / 350)
-          : (prevState.phone3 === windowWidth / 300 ? 0 : windowWidth / 300)
+          : (prevState.phone3 === windowWidth / 350 ? 0 : windowWidth / 350)
       }));
       setTargetRotation((prevRotations) => ({
         ...prevRotations,
